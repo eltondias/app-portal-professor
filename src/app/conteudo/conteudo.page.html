@@ -4,26 +4,51 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-     Conteúdo Programático
+      Conteúdo Programático
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="container text-center p-4" > 
+  <div class="container text-center p-4">
     <div class="row">
+      
       <div class="col-sm">
-          <mat-form-field>
-              <mat-label>Selecione o semestre</mat-label>
-              <mat-select required [(ngModel)]="peridoSelecionado" name="periodo">
-                <mat-option *ngFor="let semestre of semestres" value="{{semestre.ano}}|{{semestre.seqano}}"
-                  (click)="getPeriodo()">
-                  {{semestre.seqano}}º semestre de {{semestre.ano}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+        <mat-form-field>
+          <mat-label>Selecione o semestre</mat-label>
+          <mat-select  (ngModelChange)="getPeriodo()" required [(ngModel)]="peridoSelecionado" name="periodo">
+            <mat-option *ngFor="let semestre of semestres" value="{{semestre.ano}}|{{semestre.seqano}}">
+              {{semestre.seqano}}º semestre de {{semestre.ano}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
+
+      <div class="col-sm">
+        <mat-form-field>
+          <mat-label>Selecione o turma</mat-label>
+          <mat-select   (ngModelChange)="getDisciplinas()" required [(ngModel)]="filtro.turma" name="turma" [disabled]="!turmas.length">
+            <mat-option *ngFor="let turma of turmas" value="{{turma.turma}}"
+             >
+              {{turma.turma}} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm"   >
+          <mat-form-field>
+            <mat-label>Selecione a disciplina</mat-label>
+            <mat-select   required [(ngModel)]="filtro.disciplina" name="disciplina"  [disabled]="!disciplinas.length"  >
+              <mat-option *ngFor="let disciplina of disciplinas" value="{{disciplina.discip}}">
+                {{disciplina.des}} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
     </div>
   </div>
 

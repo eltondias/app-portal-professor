@@ -25,5 +25,15 @@ export class ProfessorService {
     return this.http.get<any>(this.resourceUrl + '/semestres', { params: options, observe: 'response' });
   }
 
+  getTurmas(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/turmas', { params: options, observe: 'response' });
+  }
+
+  getDisciplinas(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/disciplinas', { params: options, observe: 'response' });
+  }
+
 
 }
