@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+     Conteúdo Programático
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container text-center p-4" > 
+    <div class="row">
+      <div class="col-sm">
+          <mat-form-field>
+              <mat-label>Selecione o semestre</mat-label>
+              <mat-select required [(ngModel)]="peridoSelecionado" name="periodo">
+                <mat-option *ngFor="let semestre of semestres" value="{{semestre.ano}}|{{semestre.seqano}}"
+                  (click)="getPeriodo()">
+                  {{semestre.seqano}}º semestre de {{semestre.ano}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+
+
+</ion-content>

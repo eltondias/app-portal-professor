@@ -1,0 +1,65 @@
+<ion-header  >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Início
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="bg">
+    <div class="container">
+
+        <div class="row  p-4" >
+            <div class="col-sm text-white text-center">
+              <h4>Olá professor, {{professor.nome}}</h4>  
+              <h1>Seja bem-vindo(a) ao novo portal do professor.</h1>  
+            </div>
+        </div>
+
+      <div class="row  p-3">
+        <div class="col-sm">
+
+
+
+
+          <a [routerLink]="['/boletim']">
+            <ion-card>
+              <img src="../../assets/boletim.png">
+              <ion-card-content>
+               Agora você já pode emitir seus boletins acadêmicos com facilidade
+              </ion-card-content>
+            </ion-card>
+          </a>
+
+
+
+        </div>
+        <div class="col-sm">
+
+          <a [routerLink]="['/mensalidade']">
+            <ion-card>
+              <img src="../../assets/pagamentos.png">
+              <ion-card-content>
+                Acesse todos os seus pagamentos e emita seus boletos em um só lugar.
+              </ion-card-content>
+            </ion-card>
+          </a>
+
+        </div>
+      </div>
+
+      
+    
+
+    </div>
+
+  </div>
+
+
+</ion-content>
