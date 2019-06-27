@@ -1,8 +1,14 @@
 export class Filtro {
 
-    ano: string;
-    seqano: string;
+    semestre: Semestre;  
     turma: string;
     disciplina: string;
 
+}
+
+export class Semestre {
+    ano: number; 
+    seqano: number;
+    matric: number;
+    id: string;
 }

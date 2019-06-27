@@ -17,8 +17,8 @@
       <div class="col-sm">
         <mat-form-field>
           <mat-label>Selecione o semestre</mat-label>
-          <mat-select  (ngModelChange)="getPeriodo()" required [(ngModel)]="peridoSelecionado" name="periodo">
-            <mat-option *ngFor="let semestre of semestres" value="{{semestre.ano}}|{{semestre.seqano}}">
+          <mat-select   required [(ngModel)]="filtro.semestre" name="periodo">
+            <mat-option (click)="getTurmas()"  *ngFor="let semestre of semestres" [value]="semestre">
               {{semestre.seqano}}º semestre de {{semestre.ano}}
             </mat-option>
           </mat-select>
@@ -28,8 +28,8 @@
       <div class="col-sm">
         <mat-form-field>
           <mat-label>Selecione o turma</mat-label>
-          <mat-select   (ngModelChange)="getDisciplinas()" required [(ngModel)]="filtro.turma" name="turma" [disabled]="!turmas.length">
-            <mat-option *ngFor="let turma of turmas" value="{{turma.turma}}"
+          <mat-select    required [(ngModel)]="filtro.turma" name="turma" [disabled]="!turmas.length">
+            <mat-option (click)="getDisciplinas()" *ngFor="let turma of turmas" [value]="turma.turma"
              >
               {{turma.turma}} 
             </mat-option>
