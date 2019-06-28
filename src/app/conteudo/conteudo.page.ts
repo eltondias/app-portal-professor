@@ -28,6 +28,7 @@ export class ConteudoPage implements OnInit {
   getTurmas() {
     console.log(this.filtro);
     this.turmas = [];
+    this.disciplinas = [];
     this.professorService.getTurmas(
       {
         matricula: this.professor.matric, 
