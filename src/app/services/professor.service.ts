@@ -35,5 +35,29 @@ export class ProfessorService {
     return this.http.get<any>(this.resourceUrl + '/disciplinas', { params: options, observe: 'response' });
   }
 
+  getMeses(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/meses', { params: options, observe: 'response' });
+  }
+
+  getConteudoDisciplina(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/disciplina/conteudo', { params: options, observe: 'response' });
+  }
+
+  getAvaliacoes(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/avaliacoes', { params: options, observe: 'response' });
+  }
+
+  getAvaliacao(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/avaliacao', { params: options, observe: 'response' });
+  }
+
+  getNotasAlunosDisciplina(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/notasalunosdisciplina', { params: options, observe: 'response' });
+  }
 
 }

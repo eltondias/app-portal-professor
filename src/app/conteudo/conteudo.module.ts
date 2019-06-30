@@ -1,3 +1,4 @@
+import { ComponentesModule } from './../componentes/componentes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     MaterialModule,
+    ComponentesModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ConteudoPage]

@@ -1,0 +1,75 @@
+<ion-grid>
+  <ion-row>
+
+    <ion-col>
+      <mat-form-field>
+        <mat-label>Selecione o semestre</mat-label>
+        <mat-select required [(ngModel)]="filtro.semestre" name="periodo">
+          <mat-option (click)="getTurmas()" *ngFor="let semestre of semestres" [value]="semestre">
+            {{semestre.seqano}}º semestre de {{semestre.ano}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ion-col>
+
+    <ion-col>
+      <mat-form-field>
+        <mat-label>Selecione o turma</mat-label>
+        <mat-select required [(ngModel)]="filtro.turma" name="turma" [disabled]="!turmas.length">
+          <mat-option (click)="getDisciplinas()" *ngFor="let turma of turmas" [value]="turma.turma">
+            {{turma.turma}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ion-col>
+
+    <ion-col *ngIf="exibir_meses">
+      <mat-form-field>
+        <mat-label>Selecione a disciplina</mat-label>
+        <mat-select required [(ngModel)]="filtro.disciplina" name="disciplina" [disabled]="!disciplinas.length">
+          <mat-option (click)="getMeses()" *ngFor="let disciplina of disciplinas" value="{{disciplina.discip}}">
+            {{disciplina.des}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ion-col>
+
+    <ion-col *ngIf="exibir_meses"  >
+        <mat-form-field>
+          <mat-label>Selecione mês</mat-label>
+          <mat-select required [(ngModel)]="filtro.mes" name="mes" [disabled]="!meses.length">
+            <mat-option *ngFor="let mes of meses" [value]="mes">
+              {{mes.mes}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ion-col>
+
+
+     <ion-col  *ngIf="exibir_avaliacoes" >
+        <mat-form-field>
+          <mat-label>Selecione a disciplina</mat-label>
+          <mat-select required [(ngModel)]="filtro.disciplina" name="disciplina" [disabled]="!disciplinas.length">
+            <mat-option (click)="getAvaliacoes()" *ngFor="let disciplina of disciplinas" value="{{disciplina.discip}}">
+              {{disciplina.des}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ion-col>
+
+   
+
+    <ion-col  *ngIf="exibir_avaliacoes">
+      <mat-form-field>
+        <mat-label>Selecione Avaliação</mat-label>
+        <mat-select required [(ngModel)]="filtro.avaliacao" name="avaliacao" [disabled]="!avaliacoes.length">
+          <mat-option *ngFor="let avaliacao of avaliacoes" [value]="avaliacao">
+            {{avaliacao.ava}} - {{avaliacao.des}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ion-col>
+
+
+  </ion-row>
+</ion-grid>

@@ -13,10 +13,8 @@ export class ConteudoPage implements OnInit {
 
   professor: Professor = JSON.parse(localStorage.getItem('professor')); 
   semestres: Semestre[] = JSON.parse(localStorage.getItem('semestres'));
-  turmas: [] = [];
-  disciplinas: [] = [];
+  conteudoDisciplina: [] = [];
   filtro = new Filtro();
-
   constructor(
     private util: UtilProvider,
     private professorService: ProfessorService
@@ -24,42 +22,31 @@ export class ConteudoPage implements OnInit {
 
   ngOnInit() {}
 
-
-  getTurmas() {
+  getConteudoDisciplina() {
     console.log(this.filtro);
-    this.turmas = [];
-    this.disciplinas = [];
-    this.professorService.getTurmas(
-      {
-        matricula: this.professor.matric, 
+    this.util.loading('Consultando conteúdo programático', 1000);
+    this.conteudoDisciplina = [];
+    
+    setTimeout(() => {
+      this.professorService.getConteudoDisciplina({
+        matric: this.professor.matric, 
         ano: this.filtro.semestre.ano, 
-        seqano:  this.filtro.semestre.seqano      
-    }
-    ).subscribe(res => {
-      if(res.body) {        
-        this.turmas = res.body; 
-      }      
-      console.log( this.turmas);
-    });
-  }
+        seqano:  this.filtro.semestre.seqano,      
+        turma: this.filtro.turma,
+        discip: this.filtro.disciplina,
+        mes: this.filtro.mes.numero
+    }).subscribe(
+res => {      
+  if(res.body) {        
+    this.conteudoDisciplina = res.body;        
+  }      
+  console.log(this.conteudoDisciplina );
+});
+    }, 100);
+    
 
 
-  getDisciplinas() {
-    console.log( this.filtro.turma);
-    this.disciplinas = [];
-    this.professorService.getDisciplinas({
-              matricula: this.professor.matric, 
-              ano: this.filtro.semestre.ano, 
-              seqano:  this.filtro.semestre.seqano,      
-              turma: this.filtro.turma
-          }).subscribe(
-      res => {      
-        if(res.body) {        
-          this.disciplinas = res.body;        
-        }      
-        console.log( this.disciplinas);
-    });
   }
+
 
 }
-[]
