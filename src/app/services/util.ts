@@ -26,7 +26,7 @@ export class UtilProvider {
       message: mensagem,
       duration: (duracao)? duracao : 200
     });
-    await loading.present();
+    await loading.present();    
     const { role, data } = await loading.onDidDismiss();
   }
 

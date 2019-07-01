@@ -45,6 +45,11 @@ export class ProfessorService {
     return this.http.get<any>(this.resourceUrl + '/disciplina/conteudo', { params: options, observe: 'response' });
   }
 
+  atualizarConteudoDisciplina(conteudoDisciplina: any[]): Observable<any> { 
+    return this.http.post<any[]>(this.resourceUrl + '/disciplina/conteudo', conteudoDisciplina);
+  }
+
+
   getAvaliacoes(req?: any ): Observable<any> { 
     const options = createRequestOption(req);
     return this.http.get<any>(this.resourceUrl + '/avaliacoes', { params: options, observe: 'response' });

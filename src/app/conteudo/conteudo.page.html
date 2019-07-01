@@ -73,6 +73,15 @@
     </ion-grid>
 
 
+    <ion-grid *ngIf="conteudoDisciplina.length > 0">
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary"   (click)="salvar()">
+            Salvar 
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </div>
 </ion-content>

@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Filtro } from '../model/Filtro';
 import { ProfessorService } from '../services/professor.service';
@@ -14,16 +15,18 @@ export class NotaPage implements OnInit {
   alunos = [];
   constructor(
     private util: UtilProvider,
-    private professorService: ProfessorService
+    private professorService: ProfessorService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
   }
 
-  getNotasAlunos() {
+  async getNotasAlunos() {
     this.alunos  = [];
     console.log(this.filtro);
-    this.util.loading('Consultando alunos', 1000);
+    const loading = await this.loadingController.create({ message: 'Consultando notas' });
+    await loading.present();
 
     setTimeout(() => {
       this.professorService.getNotasAlunosDisciplina({
@@ -35,9 +38,10 @@ export class NotaPage implements OnInit {
       }).subscribe(
         res => {
           if (res.body) {
-            console.log(res.body);
+            // console.log(res.body);
             this.alunos = res.body;
           }
+          loading.dismiss();
 
         });
     }, 100);

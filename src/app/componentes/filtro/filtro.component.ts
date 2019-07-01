@@ -1,9 +1,11 @@
+import { async } from '@angular/core/testing';
 import { Filtro } from './../../model/Filtro';
 import { Component, OnInit, Input } from '@angular/core';
 import { Professor } from 'src/app/model/Professor';
 import { Semestre } from 'src/app/model/Filtro';
 import { UtilProvider } from 'src/app/services/util';
 import { ProfessorService } from 'src/app/services/professor.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-filtro',
@@ -19,20 +21,26 @@ export class FiltroComponent implements OnInit {
   meses: [] = [];
   conteudoDisciplina: [] = [];
   avaliacoes: [] = [];
+
+
   @Input() filtro: Filtro;
   @Input() exibir_meses = false;
   @Input() exibir_avaliacoes = false;
+  @Input() exibir_aulas = false;
 
   constructor(
-    private util: UtilProvider,
-    private professorService: ProfessorService
+    private professorService: ProfessorService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {}
 
 
-  getTurmas() {
-    console.log(this.filtro);
+ async getTurmas() {
+
+    const loading = await this.loadingController.create({ message: 'Buscando turmas de ' + this.filtro.semestre.ano + '/' + this.filtro.semestre.seqano  });
+    await loading.present();
+
     this.turmas = [];
     this.disciplinas = [];
     this.meses = [];
@@ -46,14 +54,18 @@ export class FiltroComponent implements OnInit {
     ).subscribe(res => {
       if(res.body) {        
         this.turmas = res.body; 
-      }      
-      console.log( this.turmas);
+      }            
+      //console.log( this.turmas);
+      loading.dismiss();
     });
   }
 
 
-  getDisciplinas() {
-    console.log( this.filtro.turma);
+  async getDisciplinas() {
+    
+    const loading = await this.loadingController.create({ message: 'Buscando disciplinas para turma: ' + this.filtro.turma });
+    await loading.present();
+
     this.disciplinas = [];
     this.professorService.getDisciplinas({
               matricula: this.professor.matric, 
@@ -65,11 +77,14 @@ export class FiltroComponent implements OnInit {
         if(res.body) {        
           this.disciplinas = res.body;        
         }      
-        console.log( this.disciplinas);
+        loading.dismiss();
     });
   }
 
-  getMeses() {
+  async getMeses() {
+    const loading = await this.loadingController.create({ message: 'Buscando meses'});
+    await loading.present();
+
     this.meses = [];
     this.professorService.getMeses({
               matric: this.professor.matric, 
@@ -83,11 +98,14 @@ export class FiltroComponent implements OnInit {
           this.meses = res.body;        
         }      
         console.log( this.meses);
+        loading.dismiss();
     });
   }
 
 
-  getAvaliacoes() {
+  async getAvaliacoes() {
+    const loading = await this.loadingController.create({ message: 'Buscando avaliações'});
+    await loading.present();
     this.avaliacoes = [];
     this.professorService.getAvaliacoes({           
               ano: this.filtro.semestre.ano, 
@@ -98,8 +116,21 @@ export class FiltroComponent implements OnInit {
           this.avaliacoes = res.body;        
         }      
         console.log( this.avaliacoes);
+        loading.dismiss();
     });
   }
 
+  
+
+  exibirCombo() {
+    if(this.exibir_meses) {
+      this.getMeses();
+    }
+
+    if(this.exibir_avaliacoes) {
+      this.getAvaliacoes();
+    }
+
+  }
 
 }

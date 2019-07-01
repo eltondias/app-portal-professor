@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       icon: 'note_add'
     },
     {
-      title: 'Lançalmento de Frequência',
+      title: 'Lançamento de Frequência',
       url: '/frequencia',
       icon: 'done_all'
     }

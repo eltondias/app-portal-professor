@@ -5,6 +5,7 @@ export class Filtro {
     disciplina: string;
     mes: Mes;
     avaliacao: any;
+    numeroAula: number;
 
 }
 

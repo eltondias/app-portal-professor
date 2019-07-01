@@ -3,6 +3,7 @@ import { Professor } from './../model/Professor';
 import { ProfessorService } from './../services/professor.service';
 import { Component, OnInit } from '@angular/core';
 import { UtilProvider } from '../services/util';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-conteudo',
@@ -11,42 +12,68 @@ import { UtilProvider } from '../services/util';
 })
 export class ConteudoPage implements OnInit {
 
-  professor: Professor = JSON.parse(localStorage.getItem('professor')); 
+  professor: Professor = JSON.parse(localStorage.getItem('professor'));
   semestres: Semestre[] = JSON.parse(localStorage.getItem('semestres'));
   conteudoDisciplina: [] = [];
   filtro = new Filtro();
+
+  duration = 5000;
+
   constructor(
     private util: UtilProvider,
-    private professorService: ProfessorService
+    private professorService: ProfessorService,
+    public loadingController: LoadingController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  getConteudoDisciplina() {
+  async getConteudoDisciplina() {
     console.log(this.filtro);
-    this.util.loading('Consultando conteúdo programático', 1000);
+    const loading = await this.loadingController.create({ message: 'Consultando conteúdo programático' });
+    await loading.present();
     this.conteudoDisciplina = [];
-    
     setTimeout(() => {
       this.professorService.getConteudoDisciplina({
-        matric: this.professor.matric, 
-        ano: this.filtro.semestre.ano, 
-        seqano:  this.filtro.semestre.seqano,      
+        matric: this.professor.matric,
+        ano: this.filtro.semestre.ano,
+        seqano: this.filtro.semestre.seqano,
         turma: this.filtro.turma,
         discip: this.filtro.disciplina,
         mes: this.filtro.mes.numero
-    }).subscribe(
-res => {      
-  if(res.body) {        
-    this.conteudoDisciplina = res.body;        
-  }      
-  console.log(this.conteudoDisciplina );
-});
+      }).subscribe(
+        res => {
+          if (res.body) {
+            this.conteudoDisciplina = res.body;
+          }
+          // console.log(this.conteudoDisciplina);
+          loading.dismiss();
+        });
     }, 100);
-    
+
 
 
   }
+
+
+
+  async  salvar() {
+
+    const loading = await this.loadingController.create({ message: 'Atualizando conteúdo programatico' });
+    await loading.present();
+    this.professorService.atualizarConteudoDisciplina(this.conteudoDisciplina).subscribe(
+      res => {
+        if (res.body) {
+          this.conteudoDisciplina = res.body;
+        }
+        // console.log(this.conteudoDisciplina);
+        loading.dismiss();
+      },
+      error => { loading.dismiss(); }
+    );
+
+
+  }
+
 
 
 }
