@@ -20,7 +20,7 @@
         <ion-col *ngIf="filtro.disciplina">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" [(ngModel)]="dataAula" name="dataAula"
-              placeholder="Informe a data">
+              placeholder="Informe a data" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -37,7 +37,7 @@
           </mat-form-field>
         </ion-col>
         <ion-col>
-          <ion-button expand="block" color="primary" (click)="getFrequanciaAlunos()" [disabled]="!filtro.numeroAula">
+          <ion-button expand="block" color="primary" (click)="getFrequenciaAlunos()" [disabled]="!filtro.numeroAula">
             Consultar
           </ion-button>
         </ion-col>

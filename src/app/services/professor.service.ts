@@ -65,4 +65,9 @@ export class ProfessorService {
     return this.http.get<any>(this.resourceUrl + '/notasalunosdisciplina', { params: options, observe: 'response' });
   }
 
+  getFrequenciaAlunos(req?: any ): Observable<any> { 
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl + '/frequenciaalunos', { params: options, observe: 'response' });
+  }
+
 }

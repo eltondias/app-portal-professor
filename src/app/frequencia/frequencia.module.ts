@@ -1,5 +1,5 @@
 import { ComponentesModule } from './../componentes/componentes.module';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -25,6 +25,7 @@ const routes: Routes = [
     MaterialModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FrequenciaPage]
+  declarations: [FrequenciaPage],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR' }]
 })
 export class FrequenciaPageModule {}
