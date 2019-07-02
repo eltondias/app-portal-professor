@@ -12,9 +12,9 @@ export class HomePage {
   professor = JSON.parse(localStorage.getItem('professor'));
 
   menus = [
-        {nome: 'Conteúdo', descricao: 'Conteúdo programático', link: '', imagem: 'conteudo_programatico.png'},
-        {nome: 'Frequência', descricao: 'Lançamento de frequência', link: '', imagem: 'lancamento_frequencia.png'},
-        {nome: 'Notas', descricao: 'Lançamento de notas', link: '', imagem: 'lancamento_notas.png'},
+        {nome: 'Conteúdo', descricao: 'Conteúdo programático', link: '/conteudo', imagem: 'conteudo_programatico.png'},
+        {nome: 'Frequência', descricao: 'Lançamento de frequência', link: '/frequencia', imagem: 'lancamento_frequencia.png'},
+        {nome: 'Notas', descricao: 'Lançamento de notas', link: '/nota', imagem: 'lancamento_notas.png'},
       ]
 
 

@@ -12,74 +12,71 @@
 <ion-content>
 
 
-    <div class="container">
+  <div class="container">
 
-        <app-filtro [filtro]="filtro" [exibir_avaliacoes] = "true" ></app-filtro>
-    
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" color="primary" (click)="getNotasAlunos()"   [disabled]="!filtro.avaliacao" >
-                Consultar
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+    <app-filtro [filtro]="filtro" [exibir_avaliacoes]="true"></app-filtro>
 
-
-        <ion-grid *ngIf="alunos.length > 0" >
-            <ion-card>
-              <ion-card-header class=" text-center">
-                  <ion-card-title>
-                      Lançamento de notas                   
-                  </ion-card-title>
-                  <ion-card-subtitle>
-                     {{filtro.semestre.ano}} / {{filtro.semestre.seqano}}  -  Turma:  {{filtro.turma}} -  {{filtro.avaliacao.des}}   -  {{filtro.disciplina}}  
-                  </ion-card-subtitle>
-                 
-              </ion-card-header>
-      
-              <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="getNotasAlunos()" [disabled]="!filtro.avaliacao">
+            Consultar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 
-                  <ion-row >
-                      <ion-col  size="1">
-                      </ion-col>
-                      <ion-col  size="2">
-                         <strong>MATRÍCULA </strong> 
-                      </ion-col>
-                      <ion-col  size="6">
-                          <strong>NOME </strong> 
-                      </ion-col>
-                      <ion-col  size="3">
-                          <strong>NOTA </strong> 
-                      </ion-col>
-                    </ion-row>
+    <ion-grid *ngIf="alunos.length > 0">
 
-                  <ion-row *ngFor="let aluno of alunos; let i = index">
-                      <ion-col  size="1">
-                          {{i + 1}}
-                      </ion-col>
-                      <ion-col  size="2">
-                          {{aluno.matric}}
-                      </ion-col>
-                      <ion-col  size="6">
-                          {{aluno.nome}}
-                      </ion-col>
-                      <ion-col  size="3">
-                        <ion-item>
-                            <ion-input [value]="alunos[i].x01_NOTA" name="nota[{{i}}]" [(ngModel)]="alunos[i].x01_NOTA"  ></ion-input>
-                        </ion-item>
-                      </ion-col>
-                     
-                    </ion-row>
 
-                 
-              </ion-card-content>
-            </ion-card>
-          </ion-grid>
-      
+      <ion-row>
 
+        <ion-col>
+          <table class="table table-striped">
+              <thead class="thead-dark">
+                  <tr>
+                  
+                    <th scope="col" colspan="4" >
+                        Lançamento de notas: 
+                        {{filtro.semestre.ano}} / {{filtro.semestre.seqano}} - Turma: {{filtro.turma}} - {{filtro.avaliacao.des}}
+                        - {{filtro.disciplina}}
+                    </th>                                       
+                  </tr>
+              </thead>
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">N.</th>
+                <th scope="col">MATRÍCULA</th>
+                <th scope="col">ALUNO</th>
+                <th scope="col">NOTA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aluno of alunos; let i = index">
+                <th scope="row"> {{i + 1}} </th>
+                <td> {{aluno.matric}} </td>
+                <td> {{aluno.nome}} </td>
+                <td>
+                  <ion-item>
+                    <ion-input [value]="alunos[i].x01_NOTA" name="nota[{{i}}]" [(ngModel)]="alunos[i].x01_NOTA">
+                    </ion-input>
+                  </ion-item>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="salvar()">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 
 

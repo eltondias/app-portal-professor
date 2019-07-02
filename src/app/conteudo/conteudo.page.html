@@ -11,13 +11,9 @@
 
 <ion-content>
 
-
-
-
-
   <div class="container text-center">
 
-    <app-filtro [filtro]="filtro"  [exibir_meses] = "true"></app-filtro>
+    <app-filtro [filtro]="filtro" [exibir_meses]="true"></app-filtro>
 
     <ion-grid>
       <ion-row>
@@ -29,55 +25,44 @@
       </ion-row>
     </ion-grid>
 
-
-    <ion-grid *ngIf="conteudoDisciplina.length > 0">
-      <ion-card>
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="2">
-              <strong>Data </strong>
-            </ion-col>
-            <ion-col size="1">
-              <strong>Aula(s) </strong>
-            </ion-col>
-            <ion-col size="6">
-              <strong>Conteúdo </strong>
-            </ion-col>
-            <ion-col size="3">
-              <strong>Observação </strong>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-
-        <ion-card-content>
-          <ion-row *ngFor="let conteudo of conteudoDisciplina; let i = index">
-            <ion-col size="2">
-              {{conteudo.dia | date: 'dd/MM/yyyy'}}
-            </ion-col>
-            <ion-col size="1">
-              {{conteudo.aula}}
-            </ion-col>
-            <ion-col size="6">
-              <ion-item>
-                <ion-textarea [(ngModel)]="conteudo.conteudo" name="conteudo"></ion-textarea>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item size="3">
-                <ion-textarea [(ngModel)]="conteudo.obs" name="conteudo"></ion-textarea>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-grid>
-
-
     <ion-grid *ngIf="conteudoDisciplina.length > 0">
       <ion-row>
         <ion-col>
-          <ion-button expand="block" color="primary"   (click)="salvar()">
-            Salvar 
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">N.</th>
+                <th scope="col">Data</th>
+                <th scope="col">Aula(s) </th>
+                <th scope="col">Descrição conteúdo</th>
+                <th scope="col">Observação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let conteudo of conteudoDisciplina; let i = index">
+                <th scope="row"> {{i + 1}} </th>
+                <td> {{conteudo.dia | date: 'dd/MM/yyyy'}}</td>
+                <td> {{conteudo.aula}}</td>
+                <td>
+                  <ion-item>
+                    <ion-textarea [(ngModel)]="conteudo.conteudo" name="conteudo"></ion-textarea>
+                  </ion-item>
+                </td>
+                <td>
+                  <ion-item size="3">
+                    <ion-textarea [(ngModel)]="conteudo.obs" name="observacao"></ion-textarea>
+                  </ion-item>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="salvar()">
+            Salvar
           </ion-button>
         </ion-col>
       </ion-row>
