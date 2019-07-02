@@ -11,55 +11,31 @@
 </ion-header>
 
 <ion-content>
-
   <div class="bg">
     <div class="container">
 
-        <div class="row  p-4" >
-            <div class="col-sm text-white text-center">
-              <h4>Olá professor, {{professor.nome}}</h4>  
-              <h1>Seja bem-vindo(a) ao novo portal do professor.</h1>  
-            </div>
-        </div>
-
-      <div class="row  p-3">
-        <div class="col-sm">
-
+        <ion-grid>
+            <ion-row>
+              <ion-col class="col-sm text-white text-center">
+                  <h4>Olá professor, {{professor.nome}}</h4>  
+              <!-- <h4>Seja bem-vindo(a) ao novo portal do professor.</h4>   -->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
 
 
-
-          <a [routerLink]="['/boletim']">
-            <ion-card>
-              <img src="../../assets/boletim.png">
-              <ion-card-content>
-               Agora você já pode emitir seus boletins acadêmicos com facilidade
-              </ion-card-content>
-            </ion-card>
-          </a>
-
-
-
-        </div>
-        <div class="col-sm">
-
-          <a [routerLink]="['/mensalidade']">
-            <ion-card>
-              <img src="../../assets/pagamentos.png">
-              <ion-card-content>
-                Acesse todos os seus pagamentos e emita seus boletos em um só lugar.
-              </ion-card-content>
-            </ion-card>
-          </a>
-
-        </div>
-      </div>
-
-      
-    
-
+      <ion-grid>
+        <ion-row>
+          <ion-col class="sistema" *ngFor="let menu of menus; let i = index" size-sm>
+            <a mat-button [matTooltip]="menu.descricao" [routerLink]="[menu.link]"   >
+              <ion-card>
+                <img src="../../assets/{{menu.imagem}}" />
+              </ion-card>
+            </a>
+            <ion-label> <strong>{{menu.nome}} </strong></ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
-
   </div>
-
-
 </ion-content>

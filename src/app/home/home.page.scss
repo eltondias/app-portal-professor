@@ -1,9 +1,3 @@
-.welcome-card ion-img {
-  max-height: 35vh;
-  overflow: hidden;
-}
-
-
 .bg {     
   font-family: Roboto, "Helvetica Neue", sans-serif;
 //  background: url('../../assets/bg_login.jpg') center center no-repeat fixed; 
@@ -18,10 +12,35 @@
   height: 100%;
 }
 
+
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+.list {
+  max-height:200px;
+  overflow-y: auto;
+}
+
+
 .col-sm {   
   z-index: 1000;
 }
 
 .sc-ion-card-md-h {
   --background: #ffffff;
+}
+
+.sc-ion-card-ios-h {
+  border-radius: 14px;
+}
+
+.sc-ion-card-md-h {
+  border-radius: 14px;
+}
+
+.sistema {
+  text-align: center;
+  color: white;
+  text-transform: capitalize;
 }

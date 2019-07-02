@@ -17,6 +17,8 @@ export class FrequenciaPage implements OnInit {
   dataAula: Date;
   aulas =  [1, 2, 3, 4];
   alunos = [];
+  alunosSalvar = [];
+  numeroAulas = [];
   
   constructor(
     private util: UtilProvider,
@@ -30,9 +32,11 @@ export class FrequenciaPage implements OnInit {
 
   async getFrequenciaAlunos() {
 
-    console.log(this.dataAula.toLocaleDateString());
- 
-    console.log(this.filtro);
+    this.numeroAulas = [];
+    for (let i = 0; i <= this.filtro.numeroAula; i++) {
+      this.numeroAulas.push({valor: i }); 
+    }
+
     const loading = await this.loadingController.create({ message: 'Consultando conteúdo programático' });
     await loading.present();
     this.alunos = [];
@@ -47,16 +51,75 @@ export class FrequenciaPage implements OnInit {
         dia:  this.dataAula.toLocaleDateString()
       }).subscribe(
         res => {
-          if (res.body) {
-            this.alunos  = res.body;
-          }
-          console.log(this.alunos)
+
+          
+          if (res.body) { 
+            res.body.forEach(aluno => {
+              this.alunosSalvar.push(aluno)
+            });     
+
+            this.alunos  = res.body;                              
+          }         
+          this.convertAulas();
           loading.dismiss();
         });
     }, 100);
+  }
 
 
+
+  convertAulas() {
+ 
+    // for (let i = 0; i < this.alunos.length; i++) {
+    //   const presencasString = Array.from( this.alunos[i].presenca.replace(/\s/g, ''));
+      
+    //   while(presencasString.length < this.alunos[i].aula) {
+    //     presencasString.push('0');
+    //   }
+
+    //   const presencasBolean = []; 
+    //   presencasString.forEach(valor => {
+    //     presencasBolean.push((valor === '1')? true: false);
+    //   });     
+    //   this.alunos[i].presenca = presencasBolean;
+    // }
+
+    for (let i = 0; i < this.alunos.length; i++) {
+      const presencasString = Array.from( this.alunos[i].presenca.replace(/\s/g, ''));
+      
+      while(presencasString.length < this.alunos[i].aula) {
+        presencasString.push('0');
+      }
+
+      this.alunos[i].presenca = 0;
+      presencasString.forEach(valor => {
+        this.alunos[i].presenca += (valor === '1')? 1: 0;
+      });     
+     
+    }
+
+     
+
+    console.log(this.alunos);
+  }
+
+  salvarFrequencias() {
+   
+  for (let i = 0; i <  this.alunos.length; i++) {
+    let presenca = '';
+    for (let i = 0; i < this.alunos[i].presenca; i++)  
+      presenca += '1';      
+    
+      this.alunosSalvar[i].presenca =  presenca;
+      presenca = '';
+  }
+
+
+    console.log(this.alunosSalvar)   
 
   }
+
+
+
 
 }

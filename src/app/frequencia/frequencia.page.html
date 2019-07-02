@@ -19,8 +19,8 @@
 
         <ion-col *ngIf="filtro.disciplina">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="dataAula" name="dataAula"
-              placeholder="Informe a data" required>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dataAula" name="dataAula" placeholder="Informe a data"
+              required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -45,10 +45,71 @@
 
 
 
+
+
+
+
     </ion-grid>
 
+    <ion-grid *ngIf="alunos.length > 0">
 
 
+
+      <ion-row>
+
+
+        <ion-col>
+
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">N.</th>
+                <th scope="col">Aluno</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Aulas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aluno of alunos; let i = index">
+                <th scope="row"> {{i + 1}} </th>
+                <td>{{aluno.nome}}</td>
+                <td>{{aluno.matric}}</td>
+                <td>
+
+
+                    <mat-form-field>                      
+                        <select matNativeControl name="presenca[i]" [(ngModel)]="aluno.presenca"  required>
+                          <option *ngFor="let aula of numeroAulas"  [value]="aula.valor"> {{aula.valor}} </option>                        
+                        </select>
+                    </mat-form-field>
+
+                  <!-- <ion-list> -->
+                  <!-- <ion-item *ngFor="let presenca of aluno.presenca; let j = index">
+                    <ion-checkbox slot="end" name="presensa[i][j]" [(ngModel)]="alunos[i].presenca[j]"></ion-checkbox>
+                  </ion-item> -->
+                  <!-- </ion-list> -->
+
+                  <!-- <ion-checkbox *ngFor="let presenca of aluno.presenca; let j = index"   [checked]="aluno.presenca[j]"></ion-checkbox> -->
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ion-col>
+
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="salvarFrequencias()">
+            Salvar frequência
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
 
 
 
